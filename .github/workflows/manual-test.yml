@@ -1,0 +1,78 @@
+name: Manual Testing Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_level:
+        description: 'Which lab level to test'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+        - all
+        - lab1
+        - lab2
+        - lab3
+        - lab4
+        - lab5
+        - lab6
+
+jobs:
+  manual-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+    
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: 21
+        distribution: 'temurin'
+    
+    - name: Run selected tests
+      run: |
+        case "${{ github.event.inputs.test_level }}" in
+          "lab1")
+            echo "🧪 Running Lab 1 tests..."
+            mvn test -Dtest="**/lab1/**/*Test" || echo "Lab 1 tests completed"
+            ;;
+          "lab2")
+            echo "🧪 Running Lab 2 tests..."
+            mvn test -Dtest="**/lab2/**/*Test" || echo "Lab 2 tests completed"
+            ;;
+          "lab3")
+            echo "🧪 Running Lab 3 tests..."
+            mvn test -Dtest="**/lab3/**/*Test" || echo "Lab 3 tests completed"
+            ;;
+          "lab4")
+            echo "🧪 Running Lab 4 tests..."
+            mvn test -Dtest="**/lab4/**/*Test" || echo "Lab 4 tests completed"
+            ;;
+          "lab5")
+            echo "🧪 Running Lab 5 tests..."
+            mvn test -Dtest="**/lab5/**/*Test" || echo "Lab 5 tests completed"
+            ;;
+          "lab6")
+            echo "🧪 Running Lab 6 tests..."
+            mvn test -Dtest="**/lab6/**/*Test" || echo "Lab 6 tests completed"
+            ;;
+          *)
+            echo "🧪 Running all tests..."
+            mvn test || echo "All tests completed"
+            ;;
+        esac
+    
+    - name: Generate coverage report
+      run: mvn jacoco:report
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: manual-test-results-${{ github.event.inputs.test_level }}
+        path: |
+          target/surefire-reports/
+          target/site/jacoco/

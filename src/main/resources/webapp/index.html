@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BikeShare Testing Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            color: #4a5568;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .module-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .module-card h3 {
+            color: #4a5568;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .module-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .module-card p {
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .challenges {
+            background: #f7fafc;
+            border-radius: 8px;
+            padding: 1rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .challenges h4 {
+            color: #4a5568;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .challenges ul {
+            list-style: none;
+            color: #718096;
+        }
+
+        .challenges li {
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .challenges li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .api-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .api-section h2 {
+            color: #4a5568;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .api-endpoints {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .api-endpoint {
+            background: #f7fafc;
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            transition: border-color 0.3s ease;
+        }
+
+        .api-endpoint:hover {
+            border-color: #667eea;
+        }
+
+        .api-endpoint code {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .api-endpoint p {
+            margin-top: 0.5rem;
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 3rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .test-button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        .test-button:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <h1>🚴‍♂️ BikeShare Testing Platform</h1>
+            <p>A comprehensive Java project for progressive software testing challenges</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="module-grid">
+            <div class="module-card">
+                <h3><span class="module-icon">1</span>Fundamentals of QA and Testing</h3>
+                <p>Foundation concepts, terminology, and basic testing principles for quality assurance.</p>
+                <div class="challenges">
+                    <h4>Testing Challenges:</h4>
+                    <ul>
+                        <li>Unit test creation for model classes</li>
+                        <li>Basic assertions and test structure</li>
+                        <li>Test naming conventions</li>
+                        <li>Understanding test lifecycle</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h3><span class="module-icon">2</span>Specification-Based Testing</h3>
+                <p>Black-box testing techniques using requirements and specifications as test basis.</p>
+                <div class="challenges">
+                    <h4>Testing Challenges:</h4>
+                    <ul>
+                        <li>Equivalence partitioning for user input</li>
+                        <li>Boundary value analysis for bike capacity</li>
+                        <li>Decision table testing for ride pricing</li>
+                        <li>State transition testing for bike status</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h3><span class="module-icon">3</span>Structural Testing & Coverage</h3>
+                <p>White-box testing focusing on code structure, paths, and coverage metrics.</p>
+                <div class="challenges">
+                    <h4>Testing Challenges:</h4>
+                    <ul>
+                        <li>Statement coverage analysis</li>
+                        <li>Branch coverage for conditional logic</li>
+                        <li>Path coverage for complex methods</li>
+                        <li>Cyclomatic complexity measurement</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h3><span class="module-icon">4</span>Regression and Advanced Testing</h3>
+                <p>Advanced testing strategies, test maintenance, and regression testing approaches.</p>
+                <div class="challenges">
+                    <h4>Testing Challenges:</h4>
+                    <ul>
+                        <li>Regression test suite design</li>
+                        <li>Test impact analysis</li>
+                        <li>Mock object implementation</li>
+                        <li>Integration testing strategies</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h3><span class="module-icon">5</span>Sustainability and Society</h3>
+                <p>Testing practices considering environmental impact and social responsibility.</p>
+                <div class="challenges">
+                    <h4>Testing Challenges:</h4>
+                    <ul>
+                        <li>Performance testing for efficiency</li>
+                        <li>Resource usage optimization tests</li>
+                        <li>Accessibility testing scenarios</li>
+                        <li>Ethical testing considerations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="module-card">
+                <h3><span class="module-icon">6</span>Testing AI and AI for Testing</h3>
+                <p>Modern approaches using AI in testing and testing AI-powered systems.</p>
+                <div class="challenges">
+                    <h4>Testing Challenges:</h4>
+                    <ul>
+                        <li>Property-based testing</li>
+                        <li>Test generation automation</li>
+                        <li>ML model validation testing</li>
+                        <li>AI bias detection in algorithms</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="api-section">
+            <h2>🔗 System Overview & Testing Endpoints</h2>
+            <p style="margin-bottom: 1.5rem; color: #718096;">
+                The BikeShare system provides a RESTful API for testing various components. 
+                Use these endpoints to validate your test implementations and explore system behavior.
+            </p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="bikeCount">-</div>
+                    <div class="stat-label">Total Bikes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="stationCount">-</div>
+                    <div class="stat-label">Stations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="userCount">-</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="rideCount">-</div>
+                    <div class="stat-label">Total Rides</div>
+                </div>
+            </div>
+
+            <div class="api-endpoints">
+                <div class="api-endpoint">
+                    <code>GET /api/bikes</code>
+                    <p>Retrieve all bikes in the system</p>
+                    <button class="test-button" onclick="testEndpoint('/api/bikes')">Test Endpoint</button>
+                </div>
+                <div class="api-endpoint">
+                    <code>GET /api/stations</code>
+                    <p>List all bike stations with capacity info</p>
+                    <button class="test-button" onclick="testEndpoint('/api/stations')">Test Endpoint</button>
+                </div>
+                <div class="api-endpoint">
+                    <code>GET /api/users</code>
+                    <p>Get user information (requires auth)</p>
+                    <button class="test-button" onclick="testEndpoint('/api/users')">Test Endpoint</button>
+                </div>
+                <div class="api-endpoint">
+                    <code>GET /api/rides</code>
+                    <p>Access ride history and statistics</p>
+                    <button class="test-button" onclick="testEndpoint('/api/rides')">Test Endpoint</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="api-section">
+            <h2>🧪 Try Backend Logic: Age Check (BankID flow)</h2>
+            <p style="margin-bottom: 1rem; color: #718096;">Simulate a BankID-authenticated age check using a Swedish personal number (YYYYMMDDNNNN). This calls the backend validator endpoint.</p>
+            <div style="display:flex; gap: 1rem; flex-wrap: wrap;">
+                <input id="pnr" placeholder="YYYYMMDDNNNN" style="padding:0.5rem; border:1px solid #e2e8f0; border-radius:6px;">
+                <label style="display:flex; align-items:center; gap:0.5rem;">
+                    <input id="auth" type="checkbox"> Simulate BankID authenticated
+                </label>
+                <button class="test-button" onclick="checkAge()">Check Age</button>
+            </div>
+            <pre id="ageResult" style="margin-top:1rem; background:#f7fafc; padding:1rem; border-radius:8px;">Result will appear here…</pre>
+        </div>
+
+        <div class="api-section">
+            <h2>💸 Swish Payment Stub</h2>
+            <p style="margin-bottom: 1rem; color: #718096;">Initiate a Swish payment request and check status using stubbed endpoints (for UI/backend testing).</p>
+            <div style="display:flex; gap: 1rem; flex-wrap: wrap;">
+                <input id="swishPhone" placeholder="E.164 phone e.g. +46701234567" style="padding:0.5rem; border:1px solid #e2e8f0; border-radius:6px;">
+                <input id="swishAmount" placeholder="Amount SEK" type="number" min="1" step="1" style="padding:0.5rem; border:1px solid #e2e8f0; border-radius:6px; width:150px;">
+                <button class="test-button" onclick="swishRequest()">Request Swish</button>
+            </div>
+            <div style="display:flex; gap: 1rem; margin-top:1rem; flex-wrap: wrap;">
+                <input id="swishReqId" placeholder="Swish requestId" style="padding:0.5rem; border:1px solid #e2e8f0; border-radius:6px;">
+                <button class="test-button" onclick="swishStatus()">Check Status</button>
+            </div>
+            <pre id="swishResult" style="margin-top:1rem; background:#f7fafc; padding:1rem; border-radius:8px;">Result will appear here…</pre>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>BikeShare Testing Platform - Designed for Progressive Software Testing Education</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+            📚 Complete testing challenges • 🔧 Explore system behavior • 📊 Analyze test coverage
+        </p>
+    </div>
+
+    <script>
+        // Load system statistics
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/stats');
+                if (response.ok) {
+                    const stats = await response.json();
+                    if (stats.bikeStats) {
+                        document.getElementById('bikeCount').textContent = stats.bikeStats.totalBikes || 0;
+                    }
+                    if (stats.stationStats) {
+                        document.getElementById('stationCount').textContent = stats.stationStats.totalStations || 0;
+                    }
+                    // Mock data for demonstration
+                    document.getElementById('userCount').textContent = '42';
+                    document.getElementById('rideCount').textContent = '156';
+                }
+            } catch (error) {
+                console.log('Stats not available yet:', error);
+                // Show placeholder data
+                document.getElementById('bikeCount').textContent = '15';
+                document.getElementById('stationCount').textContent = '8';
+                document.getElementById('userCount').textContent = '42';
+                document.getElementById('rideCount').textContent = '156';
+            }
+        }
+
+        // Test API endpoints
+        async function testEndpoint(endpoint) {
+            try {
+                const response = await fetch(endpoint);
+                const data = await response.json();
+                
+                // Create a simple modal to show results
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                    background: rgba(0,0,0,0.8); display: flex; align-items: center;
+                    justify-content: center; z-index: 1000; color: white;
+                `;
+                
+                const content = document.createElement('div');
+                content.style.cssText = `
+                    background: #2d3748; padding: 2rem; border-radius: 10px;
+                    max-width: 80%; max-height: 80%; overflow: auto;
+                    font-family: monospace; white-space: pre-wrap;
+                `;
+                
+                content.innerHTML = `
+                    <h3 style="margin-bottom: 1rem;">API Response: ${endpoint}</h3>
+                    <div style="background: #1a202c; padding: 1rem; border-radius: 5px; overflow: auto;">
+                        ${JSON.stringify(data, null, 2)}
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" 
+                            style="margin-top: 1rem; padding: 0.5rem 1rem; background: #667eea; 
+                                   color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        Close
+                    </button>
+                `;
+                
+                modal.appendChild(content);
+                document.body.appendChild(modal);
+                
+            } catch (error) {
+                alert(`Error testing ${endpoint}: ${error.message}`);
+            }
+        }
+
+        // Load stats when page loads
+        document.addEventListener('DOMContentLoaded', loadStats);
+
+        async function checkAge() {
+            const idNumber = document.getElementById('pnr').value.trim();
+            const auth = document.getElementById('auth').checked;
+            const out = document.getElementById('ageResult');
+            try {
+                const res = await fetch('/api/validate/age', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ idNumber, auth })
+                });
+                const data = await res.json();
+                out.textContent = JSON.stringify(data, null, 2);
+            } catch (e) {
+                out.textContent = 'Error: ' + e.message;
+            }
+        }
+
+        async function swishRequest() {
+            const phone = document.getElementById('swishPhone').value.trim();
+            const amount = parseFloat(document.getElementById('swishAmount').value);
+            const out = document.getElementById('swishResult');
+            try {
+                const res = await fetch('/api/payments/swish/request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone, amount, message: 'BikeShare ride' })
+                });
+                const data = await res.json();
+                document.getElementById('swishReqId').value = data.requestId || '';
+                out.textContent = JSON.stringify(data, null, 2);
+            } catch (e) {
+                out.textContent = 'Error: ' + e.message;
+            }
+        }
+
+        async function swishStatus() {
+            const requestId = document.getElementById('swishReqId').value.trim();
+            const out = document.getElementById('swishResult');
+            try {
+                const res = await fetch('/api/payments/swish/status', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ requestId })
+                });
+                const data = await res.json();
+                out.textContent = JSON.stringify(data, null, 2);
+            } catch (e) {
+                out.textContent = 'Error: ' + e.message;
+            }
+        }
+    </script>
+</body>
+</html>

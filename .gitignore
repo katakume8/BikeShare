@@ -1,0 +1,33 @@
+﻿# Maven
+target/
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Test Results
+junit/
+surefire-reports/
+
+# Coverage Reports
+jacoco/
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+*~

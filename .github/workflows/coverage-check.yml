@@ -1,0 +1,61 @@
+name: Coverage Status Check
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  coverage-check:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Run tests and generate coverage (skip coverage check)
+      run: |
+        # Run tests and continue even if some fail (student repository)
+        mvn clean test -Djacoco.skip=true -Dmaven.test.failure.ignore=true
+        mvn jacoco:report -Djacoco.skip=false
+        
+    - name: Extract coverage info
+      id: coverage
+      run: |
+        # Simple coverage extraction from JaCoCo XML report
+        if [ -f target/site/jacoco/jacoco.xml ]; then
+          # Extract line coverage percentage using grep and sed
+          LINE_COV=$(grep -o 'type="LINE".*missed="[0-9]*".*covered="[0-9]*"' target/site/jacoco/jacoco.xml | head -1 | sed 's/.*missed="\([0-9]*\)".*covered="\([0-9]*\)".*/\1 \2/' | awk '{total=$1+$2; if(total>0) printf "%.1f", ($2/total)*100; else print "0"}')
+          BRANCH_COV=$(grep -o 'type="BRANCH".*missed="[0-9]*".*covered="[0-9]*"' target/site/jacoco/jacoco.xml | head -1 | sed 's/.*missed="\([0-9]*\)".*covered="\([0-9]*\)".*/\1 \2/' | awk '{total=$1+$2; if(total>0) printf "%.1f", ($2/total)*100; else print "0"}')
+          
+          echo "line_coverage=$LINE_COV" >> $GITHUB_OUTPUT
+          echo "branch_coverage=$BRANCH_COV" >> $GITHUB_OUTPUT
+          
+          echo "📊 Coverage Results:"
+          echo "   Line Coverage: $LINE_COV%"
+          echo "   Branch Coverage: $BRANCH_COV%"
+        else
+          echo "❌ No coverage data generated"
+          echo "line_coverage=0" >> $GITHUB_OUTPUT
+          echo "branch_coverage=0" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Coverage Summary
+      run: |
+        LINE_COV="${{ steps.coverage.outputs.line_coverage }}"
+        BRANCH_COV="${{ steps.coverage.outputs.branch_coverage }}"
+        
+        echo "📊 Coverage Summary"
+        echo "=================="
+        echo "Line Coverage: $LINE_COV%"
+        echo "Branch Coverage: $BRANCH_COV%"
+        echo ""
+        echo "💡 Keep implementing tests to increase coverage!"
+        echo "🎯 Target: 70%+ line coverage for full credit"
