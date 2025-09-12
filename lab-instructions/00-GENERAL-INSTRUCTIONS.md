@@ -85,7 +85,7 @@ mvn test
 3. Start the demo web app (optional):
 
 ```bash
-mvn exec:java -Dexec.mainClass="com.bikeshare.web.SimpleBikeShareWebServer"
+mvn exec:java
 # then visit http://localhost:8080
 ```
 
