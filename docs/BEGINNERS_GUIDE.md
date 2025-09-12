@@ -27,7 +27,7 @@ mvn clean compile
 
 ### Step 2: Run Your First Test (2 minutes)
 ```bash
-mvn test -Dtest=BikeBasicTest
+mvn test 
 ```
 
 If you see "BUILD SUCCESS" - congratulations! 🎉
