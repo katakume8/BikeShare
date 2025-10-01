@@ -145,10 +145,6 @@ public class StationBikeTest {
         assertFalse(station.getReservedBikeIds().contains(bike.getBikeId()));
     }
 
-
-
-    // TODO: getAvailableBike
-
     @Test
     void shouldReturnNullIfStationNotActive() {
         assertNull(station.getAvailableBike(Bike.BikeType.STANDARD));
@@ -202,12 +198,6 @@ public class StationBikeTest {
         assertEquals(bike, station.getAvailableBike(Bike.BikeType.ELECTRIC));
     }
 
-    // TODO: getAvailableBike
-
-
-
-    // TODO: getAvailableBikesByType
-
     @Test
     void shouldReturnAllAvailableBikesOfStandardType() {
         Bike bike1 = new Bike("S1", Bike.BikeType.STANDARD);
@@ -218,10 +208,6 @@ public class StationBikeTest {
 
         assertEquals(List.of(bike1), station.getAvailableBikesByType(Bike.BikeType.STANDARD));
     }
-
-    // TODO: getAvailableBikesByType
-
-
 
     @Test
     void shouldThrowExceptionIfChargingIsNotAvailable() {
@@ -261,10 +247,6 @@ public class StationBikeTest {
         assertDoesNotThrow(() -> station.chargeElectricBikes(100.00));
     }
 
-
-
-    // TODO: getAvailableBikeCount
-
     @Test
     void shouldReturnTheCorrectAmountOfAvailableBikes() {
         Bike bike1 = new Bike("S1", Bike.BikeType.STANDARD);
@@ -274,32 +256,6 @@ public class StationBikeTest {
 
         assertEquals(1, station.getAvailableBikeCount());
     }
-
-    @Test
-    void shghf() {
-        Station test = new Station("gfk", "gjfk", "gfdkl", 10, 10, 10);
-
-        Bike bike1 = new Bike("S1", Bike.BikeType.STANDARD);
-        Bike bike2 = new Bike("S2", Bike.BikeType.STANDARD);
-        Bike bike3 = new Bike("S3", Bike.BikeType.STANDARD);
-        Bike bike4 = new Bike("S4", Bike.BikeType.STANDARD);
-
-        test.activate();
-        test.addBike(bike1);
-        test.addBike(bike2);
-        test.addBike(bike3);
-        test.addBike(bike4);
-
-        test.reserveBike(bike3.getBikeId());
-
-        bike4.startRide();
-
-        assertEquals(2, test.getAvailableBikeCount());
-    }
-
-    // TODO: getAvailableBikeCount
-
-
 
     @Test
     void shouldReturnTheTotalAmountOfAvailableBikes() {
