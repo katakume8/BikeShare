@@ -275,7 +275,7 @@ class BikeTest {
     @Test
     void shouldBeEqualWhenComparing(){
         Bike bike = new Bike("B001", Bike.BikeType.STANDARD);
-        assertEquals(bike, bike);
+        assertEquals(bike, new Bike("B001", Bike.BikeType.STANDARD));
     }
 
     @Test
