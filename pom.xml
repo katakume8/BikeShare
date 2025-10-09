@@ -577,6 +577,7 @@
                             
                             <!-- Coverage-focused test analysis -->
                             <targetTests>
+                                <param>com.bikeshare.lab4.MutationImprovementTest</param>
                                 <param>com.bikeshare.lectures.CoverageEx</param>
                             </targetTests>
                             
