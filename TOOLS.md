@@ -1,13 +1,13 @@
 # 🛠️ Testing & Quality Tools Guide
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/ci.yml?branch=master&label=CI%20Build&logo=github)
-![Coverage Check](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/coverage-check.yml?branch=master&label=Coverage&logo=codecov)
-![Security Check](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/dependency-security.yml?branch=master&label=Security&logo=security)
-![Test Report](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/test-report.yml?branch=master&label=Tests&logo=github-actions)
-![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)
-![Maven](https://img.shields.io/badge/Maven-3.9.9-red?logo=apache-maven)
-![JUnit](https://img.shields.io/badge/JUnit-5.10.0-green?logo=junit5)
-![License](https://img.shields.io/badge/license-MIT-blue)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/ci.yml?branch=master&label=CI%20Build&logo=github)](https://github.com/sergiorico/Bike_System_25_MiUn/actions/workflows/ci.yml)
+[![Coverage Check](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/coverage-check.yml?branch=master&label=Coverage&logo=codecov)](https://github.com/sergiorico/Bike_System_25_MiUn/actions/workflows/coverage-check.yml)
+[![Security Check](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/dependency-security.yml?branch=master&label=Security&logo=security)](https://github.com/sergiorico/Bike_System_25_MiUn/actions/workflows/dependency-security.yml)
+[![Test Report](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/test-report.yml?branch=master&label=Tests&logo=github-actions)](https://github.com/sergiorico/Bike_System_25_MiUn/actions/workflows/test-report.yml)
+[![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)](https://openjdk.org/projects/jdk/21/)
+[![Maven](https://img.shields.io/badge/Maven-3.9.9-red?logo=apache-maven)](https://maven.apache.org/)
+[![JUnit](https://img.shields.io/badge/JUnit-5.10.0-green?logo=junit5)](https://junit.org/junit5/)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 ## Overview
 
@@ -245,11 +245,11 @@ mvn pmd:cpd
 
 ### GitHub Actions
 
-![Build](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/ci.yml?branch=master&label=CI%20Pipeline&logo=github-actions)
-![Coverage Check](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/coverage-check.yml?branch=master&label=Coverage&logo=codecov)
-![Security](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/dependency-security.yml?branch=master&label=Security&logo=github-actions)
-![Test Report](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/test-report.yml?branch=master&label=Test%20Report&logo=github-actions)
-![Manual Tests](https://img.shields.io/badge/manual%20tests-available-blue?logo=github-actions)
+[![Build](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/ci.yml?branch=master&label=CI%20Pipeline&logo=github-actions)](https://github.com/sergiorico/Bike_System_25_MiUn/actions/workflows/ci.yml)
+[![Coverage Check](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/coverage-check.yml?branch=master&label=Coverage&logo=codecov)](https://github.com/sergiorico/Bike_System_25_MiUn/actions/workflows/coverage-check.yml)
+[![Security](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/dependency-security.yml?branch=master&label=Security&logo=github-actions)](https://github.com/sergiorico/Bike_System_25_MiUn/actions/workflows/dependency-security.yml)
+[![Test Report](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/test-report.yml?branch=master&label=Test%20Report&logo=github-actions)](https://github.com/sergiorico/Bike_System_25_MiUn/actions/workflows/test-report.yml)
+[![Manual Tests](https://img.shields.io/badge/manual%20tests-available-blue?logo=github-actions)](https://github.com/sergiorico/Bike_System_25_MiUn/actions/workflows/manual-test.yml)
 
 **Purpose**: Automated testing and quality checks
 
