@@ -1,9 +1,11 @@
 # 🛠️ Testing & Quality Tools Guide
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike-System-25/ci.yml?branch=main&label=Build&logo=github)
-![Coverage](https://img.shields.io/badge/coverage-check-blue?logo=codecov)
+![Build Status](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/ci.yml?branch=master&label=CI%20Build&logo=github)
+![Coverage Check](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/coverage-check.yml?branch=master&label=Coverage&logo=codecov)
+![Security Check](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/dependency-security.yml?branch=master&label=Security&logo=security)
+![Test Report](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/test-report.yml?branch=master&label=Tests&logo=github-actions)
 ![Java](https://img.shields.io/badge/Java-21-orange?logo=openjdk)
-![Maven](https://img.shields.io/badge/Maven-3.8+-red?logo=apache-maven)
+![Maven](https://img.shields.io/badge/Maven-3.9.9-red?logo=apache-maven)
 ![JUnit](https://img.shields.io/badge/JUnit-5.10.0-green?logo=junit5)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
@@ -243,8 +245,10 @@ mvn pmd:cpd
 
 ### GitHub Actions
 
-![Build](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike-System-25/ci.yml?branch=main&label=CI%20Pipeline&logo=github-actions)
-![Coverage Check](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike-System-25/coverage-check.yml?branch=main&label=Coverage&logo=codecov)
+![Build](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/ci.yml?branch=master&label=CI%20Pipeline&logo=github-actions)
+![Coverage Check](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/coverage-check.yml?branch=master&label=Coverage&logo=codecov)
+![Security](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/dependency-security.yml?branch=master&label=Security&logo=github-actions)
+![Test Report](https://img.shields.io/github/actions/workflow/status/sergiorico/Bike_System_25_MiUn/test-report.yml?branch=master&label=Test%20Report&logo=github-actions)
 ![Manual Tests](https://img.shields.io/badge/manual%20tests-available-blue?logo=github-actions)
 
 **Purpose**: Automated testing and quality checks
@@ -295,6 +299,51 @@ Branch Coverage: 65.2%
 3. Click "Run workflow"
 4. Choose test level
 5. Click "Run workflow" button
+
+---
+
+#### 4. Test Report (`test-report.yml`)
+**Triggers**: Push to master/main, Pull Requests
+
+**Actions**:
+- Run Maven tests
+- Generate detailed test reports with dorny/test-reporter
+- Display test summary with test-summary action
+- Shows pass/fail/skip counts with visual indicators
+
+**Benefits**:
+- ✅ Beautiful test reports in GitHub Actions UI
+- 📊 Test trend analysis
+- 🔍 Detailed failure information
+
+---
+
+#### 5. Dependency Security Check (`dependency-security.yml`)
+**Triggers**: Push to master/main, Pull Requests, Weekly schedule (Mondays 9 AM)
+
+**Actions**:
+- Run OWASP Dependency Check
+- Scan for known CVEs in dependencies
+- Generate security report
+- Upload report as artifact
+
+**What It Checks**:
+- Known vulnerabilities (CVEs)
+- Dependency security issues
+- Fails build on CVSS >= 7 (High severity)
+
+---
+
+#### 6. Quality Badges (`quality-badges.yml`)
+**Triggers**: Push to master/main
+
+**Actions**:
+- Generate JaCoCo coverage report
+- Create coverage badge SVG
+- Auto-commit badge to `.github/badges/` directory
+- Display line and branch coverage percentages
+
+**Result**: Dynamic badges showing current coverage percentages
 
 
 ## 🏗️ 6. Build & Dependency Management
