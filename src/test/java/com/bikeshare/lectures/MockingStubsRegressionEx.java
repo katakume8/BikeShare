@@ -1,8 +1,12 @@
 package com.bikeshare.lectures;
 
+import com.bikeshare.lab6.*;
 import com.bikeshare.model.*;
 import com.bikeshare.repository.*;
-import com.bikeshare.service.*;
+import com.bikeshare.service.BikeService;
+import com.bikeshare.service.NotificationService;
+import com.bikeshare.service.PaymentService;
+import com.bikeshare.service.UserService;
 import com.bikeshare.service.exception.*;
 
 import org.junit.jupiter.api.*;

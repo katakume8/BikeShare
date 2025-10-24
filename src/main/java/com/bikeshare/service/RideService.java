@@ -51,6 +51,10 @@ public class RideService {
     public Ride startRide(String userId, String bikeId, String startStationId) {
         // Validate user exists and can start a ride
     User user = userService.getUserById(userId);
+            if (!user.isActive()) {
+                throw new InvalidRideOperationException("User account is not active");
+            }
+
         List<Ride> activeRides = rideRepository.findActiveRidesByUserId(userId);
         if (!activeRides.isEmpty()) {
             throw new ActiveRideExistsException("User already has an active ride");
@@ -64,9 +68,14 @@ public class RideService {
         
         // Validate station exists
         Station startStation = stationService.findStationById(startStationId);
+            //if (startStation.getBikes().isEmpty()) {
+            if (startStation.getAvailableBikeCount() == 0) {
+                throw new InvalidRideOperationException("Station has no available bikes");
+            }
         
         // Check if user has sufficient balance for minimum ride cost
     double minCost = com.bikeshare.model.BikeType.STANDARD.getPricePerMinute() * 5; // conservative
+
     if (user.getAccountBalance() < minCost) {
             throw new InvalidRideOperationException("Insufficient balance for ride");
         }

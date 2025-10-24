@@ -44,7 +44,7 @@ public class StationBikeTest {
     }
 
     @Test
-    void shouldThrowWhenStationsIsFull(){
+    void shouldThrowWhenAddingBikeToStationWithNoAvailableDocks() {
         Bike testBike1 = new Bike("1", Bike.BikeType.STANDARD);
         Bike testBike2 = new Bike("2", Bike.BikeType.STANDARD);
         Bike testBike3 = new Bike("3", Bike.BikeType.STANDARD);
@@ -218,22 +218,28 @@ public class StationBikeTest {
 
     @Test
     void shouldChargeAvailableElectricBikes() {
-        Bike bike1 = new Bike("E1", Bike.BikeType.ELECTRIC);
-        Bike bike2 = new Bike("E2", Bike.BikeType.ELECTRIC);
+        // Arrange: create two electric bikes and prepare the station for charging
+        Bike electricBike1 = new Bike("E1", Bike.BikeType.ELECTRIC);
+        Bike electricBike2 = new Bike("E2", Bike.BikeType.ELECTRIC);
 
         station.activate();
-        station.enableCharging(1.00);
-        station.addBike(bike1);
-        station.addBike(bike2);
+        station.enableCharging(1.00); // enable charging with a given rate
+        station.addBike(electricBike1);
+        station.addBike(electricBike2);
 
-        bike1.startRide();
-        bike1.endRide(10);
+        // Make bike1 available by finishing a ride (so it can be charged)
+        electricBike1.startRide();
+        electricBike1.endRide(10); // simulate a ride that affects battery level
 
-        bike2.startRide();
+        // Keep bike2 in use so it should not be charged
+        electricBike2.startRide();
 
-        station.chargeElectricBikes(100.00);
+        // Act: charge all available electric bikes at the station
+        double chargeAmount = 100.00;
+        station.chargeElectricBikes(chargeAmount);
 
-        assertEquals(100.00, bike1.getBatteryLevel());
+        // Assert: only the available electric bike received the charge
+        assertEquals(100.00, electricBike1.getBatteryLevel());
     }
 
     @Test
