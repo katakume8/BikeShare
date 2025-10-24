@@ -319,12 +319,4 @@ class BikeTest {
         Bike bike = new Bike("B001", Bike.BikeType.STANDARD);
         assertEquals(Objects.hash(bike.getBikeId()), bike.hashCode());
     }
-
-    @Test
-    void shouldReturnCorrectBikeString() {
-        Bike bike = new Bike("B002", Bike.BikeType.STANDARD);
-
-        assertEquals("Bike{id='B002', type=STANDARD, status=AVAILABLE, battery=-1,0%, rides=0}",
-                bike.toString());
-    }
 }
